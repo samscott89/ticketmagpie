@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage('some-stage') {
             steps {
-                sh 'inspec exec https://github.com/dev-sec/cis-docker-benchmark --format junit --output=inspec.xml'
+                sh 'inspec exec https://github.com/dev-sec/cis-docker-benchmark --format junit junit:/tmp/junit.xml'
             }
             post {
                 always {
-                    sh 'pwd && ls -ltr'
-                    //junit 'build/reports/**/*.xml'
+                    //sh 'pwd && ls -ltr'
+                    junit '/tmp/junit.xml'
                 }
             }
         }
