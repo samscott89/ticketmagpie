@@ -7,7 +7,8 @@ pipeline {
             }
             post {
                 always {
-                    junit 'build/reports/**/*.xml'
+                    sh 'pwd && ls -ltr'
+                    //junit 'build/reports/**/*.xml'
                 }
             }
         }
