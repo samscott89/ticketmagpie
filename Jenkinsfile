@@ -8,7 +8,7 @@ pipeline {
         }
         stage('test') {
             steps {
-                sh 'mvn sonar:sonar -Dsonar.host.url=http://172.26.0.4:9000'
+                sh 'mvn sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=bb586b9252d0b55821b0bb01b0ce60aaa538ce09'
             }
         }
     }
