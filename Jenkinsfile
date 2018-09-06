@@ -8,7 +8,7 @@ pipeline {
         }
         stage('test') {
             steps {
-                sh 'mvn sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=bb586b9252d0b55821b0bb01b0ce60aaa538ce09'
+                sh 'mvn sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=cd8ee2305440df27f74a66c6bb817f5040780ef6'
             }
         }
     }
