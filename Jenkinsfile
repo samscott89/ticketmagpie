@@ -1,9 +1,14 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('some-stage') {
             steps {
-                sh 'inspec exec https://github.com/dev-sec/cis-docker-benchmark --format junit'
+                sh 'inspec exec https://github.com/dev-sec/cis-docker-benchmark --format junit --output=inspec.xml'
+            }
+            post {
+                always {
+                    junit 'build/reports/**/*.xml'
+                }
             }
         }
         stage('test') {
