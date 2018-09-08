@@ -8,7 +8,7 @@ pipeline {
             post {
                 always {
                     //sh 'pwd && ls -ltr'
-                    //junit '/tmp/junit.xml'
+                    junit '/tmp/junit.xml'
                     sh 'echo 12345667'
                 }
             }
