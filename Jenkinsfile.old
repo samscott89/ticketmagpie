@@ -1,23 +1,32 @@
 pipeline {
     agent any
     stages {
-        stage('some-stage') {
+        stage('build') {
             steps {
-                sh 'inspec exec https://github.com/dev-sec/linux-baseline.git --reporter junit:/tmp/junitlinux.xml'
-            }
-            post {
-                always {
-                    //sh 'pwd && ls -ltr'
-                    junit '/tmp/junitlinux.xml'
-                    sh 'echo 12345667'
-                }
+                sh 'mvn clean install'
+            }        
+        }
+        stage('test') {
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=cd8ee2305440df27f74a66c6bb817f5040780ef6'
             }
         }
         stage('test') {
             steps {
-                // sh 'mvn sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=cd8ee2305440df27f74a66c6bb817f5040780ef6'
-                sh 'echo 123'
+                sh 'sleep 5s'
+                timeout(time: 5, unit: 'MINUTES') {
+                    script {
+                        def result = waitForQualityGate()
+                        if (result.status != 'OK') {
+                            error "Pipeline aborted due to quality gate failure: ${result.status}"
+                        } else {
+                            echo "Quality gate passed with result: ${result.status}"
+                        }
+                    }
+                }
+
             }
         }
+        
     }
 }
