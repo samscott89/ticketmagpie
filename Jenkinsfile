@@ -11,7 +11,7 @@ pipeline {
                 sh 'mvn sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=7c64d75fbcf46563e30a37a65f6fcbee2ccb6284'
             }
         }
-        stage('test') {
+        stage('qualty gate') {
             steps {
                 sh 'sleep 5s'
                 timeout(time: 5, unit: 'MINUTES') {
