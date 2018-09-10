@@ -8,11 +8,8 @@ pipeline {
         }
         stage("SonarQube analysis") {
             steps {
-                dir("sonar") {
-                    unstash 'it'
-                    withSonarQubeEnv('sonar') {
+                withSonarQubeEnv('sonar') {
                         sh 'mvn sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=7c64d75fbcf46563e30a37a65f6fcbee2ccb6284'
-                    }
                 }
             }
         }
