@@ -13,7 +13,7 @@ pipeline {
                 }
             }
         }
-        stage('qualty gate') {
+        stage('Quality Gate') {
             steps {
                 sh 'sleep 5s'
                 timeout(time: 5, unit: 'MINUTES') {
